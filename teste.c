@@ -1,13 +1,14 @@
 #include "contato.h"
+#include "fileio.h"
 
 int menuUI(){
     int op;
 
     puts("O que voce quer fazer? ");
-    printf("Digite: \n [0]Para adicionar\n [1]Para remover\n [2]Para ver a lista\n [3]Buscar\n [4]Fechar\n");
+    printf("Digite: \n [0]Para adicionar uma pessoa\n [1]Para remover um contato\n [2]Para ver a lista completa\n [3]Para buscar um contato específico\n [4]Para atualizar um contato\n [5]Fechar\n");
     printf("Choice: ");
-    putchar('\n');
     scanf("%d", &op); 
+    putchar('\n');
     return op;
 }
 
@@ -16,7 +17,8 @@ int main(void){
 
     char nome[160], telefone[160], cpf[160], email[160];
     int opt;
-
+    puts("Bem-vindo(a) à Agenda de Contatos!");
+    printf("\tLEMBRE-SE:\n\tA forma padrao das entradas sao com os espacos e caracteres especiais do jeito a seguir:\n\t\tCPF:xxx-xxx-xxx-xx\n\t\tNUMERO:+55 DDD 9xxxx-xxxx\n\n");
     opt= menuUI();
     while(opt!=4){
         numbers* numeros= numbersCreate();
@@ -31,16 +33,31 @@ int main(void){
                 printf("CPF: ");
                 scanf(" %[^\n]", cpf);
                 scanf("%*c");
+                while(!validar_cpf(cpf)){
+                    printf("CPF: ");
+                    scanf(" %[^\n]", cpf);
+                    scanf("%*c");
+                }
                 
 
                 printf("Telefone: ");
                 scanf("%[^\n]", telefone);
                 scanf("%*c");
+                while(!validar_telefone(telefone)){
+                    printf("Telefone: ");
+                    scanf("%[^\n]", telefone);
+                    scanf("%*c");
+                }
                 addNumbers(numeros, telefone);
 
                 printf("Email: ");
                 scanf(" %[^\n]", email);
                 scanf("%*c");
+                while(!validar_email(email)){
+                    printf("Email: ");
+                    scanf(" %[^\n]", email);
+                    scanf("%*c");
+                }
                 addEmails(emails, email);
 
                 printf("Quer adicionar mais um numero? Digite [0] para nao ou [1] para sim: ");
@@ -50,6 +67,11 @@ int main(void){
                     printf("Telefone: ");
                     scanf(" %[^\n]", telefone);
                     scanf("%*c");
+                    while(!validar_telefone(telefone)){
+                        printf("Telefone: ");
+                        scanf("%[^\n]", telefone);
+                        scanf("%*c");
+                    }
                     addNumbers(numeros, telefone);
 
                     printf("Quer adicionar mais um numero? Digite [0] para nao ou [1] para sim: ");
@@ -61,6 +83,11 @@ int main(void){
                     printf("Email: ");
                     scanf(" %[^\n]", email);
                     scanf("%*c");
+                    while(!validar_email(email)){
+                        printf("Email: ");
+                        scanf(" %[^\n]", email);
+                        scanf("%*c");
+                    }
                     addEmails(emails, email);
 
                     printf("Quer adicionar mais um email? Digite [0] para nao ou [1] para sim: ");
