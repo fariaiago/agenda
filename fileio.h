@@ -21,7 +21,14 @@ void salvar_dados(struct agenda *agenda);
  * @brief Lê dados de um arquivo e insere-os no banco de dados
  * @param caminho Caminho ao arquivo que será lido
 */
-void atualizar_de_arquivo(char *caminho);
+void adicionar_de_arquivo(char *caminho);
+
+/**
+ * @brief Lê dados de um arquivo e remove os que batem do banco de dados
+ * @param caminho Caminho ao arquivo que será lido
+*/
+void remover_de_arquivo(char *caminho);
+
 
 /**
  * @brief Verifica se um telefone é valido
