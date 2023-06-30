@@ -5,6 +5,9 @@
 
 #define ZERO_ASCII 48
 
+#define TEL_TAMANHO_PAIS 15
+#define TEL_TAMANHO_DDD 12
+
 #define CPF_TAMANHO_DIGITOS 9
 #define CPF_TAMANHO_CRU 11
 #define CPF_TAMANHO_FORMATADO 14
@@ -21,11 +24,30 @@ struct agenda *carregar_dados()
 void salvar_dados(struct agenda *agenda)
 {}
 
-void atualizar_de_arquivo(char *caminho)
+void adicionar_de_arquivo(char *caminho)
 {}
 
 bool validar_telefone(char *numero)
-{}
+{
+	size_t len = strlen(numero);
+	if(len != TEL_TAMANHO_PAIS && len != TEL_TAMANHO_DDD)
+	{
+		return false;
+	}
+	char tel_limpo[TEL_TAMANHO_DDD];
+	if(len == TEL_TAMANHO_PAIS)
+	{
+		memcpy(tel_limpo, &numero[3], TEL_TAMANHO_DDD);
+	}
+	for (int i = 0; i < TEL_TAMANHO_DDD; i++)
+	{
+		if(!isdigit(tel_limpo[i]))
+		{
+			return false;
+		}
+	}
+	return true;
+}
 
 bool validar_cpf(char *cpf)
 {
@@ -69,8 +91,8 @@ bool validar_cpf(char *cpf)
 
 bool validar_email(char *email)
 {
-	if(strstr(email, EMAIL_GMAIL) || strstr(email, EMAIL_YAHOO) || strstr(email, EMAIL_UFTMAIL)
-			|| strstr(email, EMAIL_HOTMAIL) || strstr(email, EMAIL_PROTONMAIL))
+	if(strstr(email, EMAIL_GMAIL) > email || strstr(email, EMAIL_YAHOO) > email || strstr(email, EMAIL_UFTMAIL) > email
+			|| strstr(email, EMAIL_HOTMAIL) > email || strstr(email, EMAIL_PROTONMAIL) > email)
 		return true;
 	return false;
 }
