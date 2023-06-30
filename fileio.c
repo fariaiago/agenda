@@ -1,12 +1,13 @@
 #include "fileio.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
 #define ZERO_ASCII 48
 
-#define TEL_TAMANHO_PAIS 15
-#define TEL_TAMANHO_DDD 12
+#define TEL_TAMANHO_PAIS 14
+#define TEL_TAMANHO_DDD 11
 
 #define CPF_TAMANHO_DIGITOS 9
 #define CPF_TAMANHO_CRU 11
@@ -27,6 +28,9 @@ void salvar_dados(struct agenda *agenda)
 void adicionar_de_arquivo(char *caminho)
 {}
 
+void remover_de_arquivo(char *caminho)
+{}
+
 bool validar_telefone(char *numero)
 {
 	size_t len = strlen(numero);
@@ -34,11 +38,17 @@ bool validar_telefone(char *numero)
 	{
 		return false;
 	}
+
 	char tel_limpo[TEL_TAMANHO_DDD];
 	if(len == TEL_TAMANHO_PAIS)
 	{
-		memcpy(tel_limpo, &numero[3], TEL_TAMANHO_DDD);
+		strncpy(tel_limpo, &numero[3], TEL_TAMANHO_DDD);
 	}
+	else
+	{
+		strncpy(tel_limpo, numero, TEL_TAMANHO_DDD);
+	}
+
 	for (int i = 0; i < TEL_TAMANHO_DDD; i++)
 	{
 		if(!isdigit(tel_limpo[i]))
@@ -56,7 +66,7 @@ bool validar_cpf(char *cpf)
 	{
 		return false;
 	}
-	char cpf_limpo[11];
+	char cpf_limpo[CPF_TAMANHO_CRU];
 
 	if(len == CPF_TAMANHO_FORMATADO)
 	{
