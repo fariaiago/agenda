@@ -1,4 +1,5 @@
 #include "fileio.h"
+#include "contato.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,10 +21,15 @@
 #define EMAIL_PROTONMAIL "@proton.me"
 
 struct agenda *carregar_dados()
-{}
+{
+	return NULL;
+}
 
 void salvar_dados(struct agenda *agenda)
-{}
+{
+	FILE *out = fopen("banco-de-dados.txt", "w");
+	listWrite(agenda, out);
+}
 
 void adicionar_de_arquivo(char *caminho)
 {}

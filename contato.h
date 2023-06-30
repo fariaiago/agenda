@@ -95,4 +95,11 @@ bool search(agenda*, char*);
 */
 void listPrint(agenda *);
 
+/**
+ * Escreve uma agenda para o disco rigido
+ * @param agenda Agenda de contatos
+ * @param stream Arquivo de saída
+*/
+void listWrite(agenda *list, FILE *stream);
+
 #endif

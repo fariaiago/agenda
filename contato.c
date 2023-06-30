@@ -236,3 +236,39 @@ void listPrint(agenda *list){
     }
     putchar('\n');
 }
+
+void listWrite(agenda *list, FILE *stream)
+{
+	node *aux= list->inicio;
+	while(aux)
+	{
+		fputs(aux->nome, stream);
+		fputc('\n', stream);
+		fputs(aux->cpf, stream);
+		fputc('\n', stream);
+
+		node2* aux2 = aux->headNumeros->inicio;
+		fputs(aux2->numeros, stream);
+		fputc(' ', stream);
+		aux2= aux2->nextNumber;
+		while(aux2)
+		{
+			fputs(aux2->numeros, stream);
+			fputc(' ', stream);
+			aux2 = aux2->nextNumber;
+		}
+		fputc('\n', stream);
+		node3 *aux3 = aux->headEmail->inicioEm;
+		fputs(aux3->email, stream);
+		fputc(' ', stream);
+		aux3 = aux3->nextEm;
+		while(aux3)
+		{
+			fputs(aux3->email, stream);
+			fputc(' ', stream);
+			aux3 = aux3->nextEm;
+		}
+		aux = aux->next;
+		putc('\n', stream);
+	}
+}
