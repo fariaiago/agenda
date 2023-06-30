@@ -1,1 +1,1 @@
-gcc -ansi -O2 -std=c99 %1 -o %2 -lm
+gcc agenda.c contato.c fileio.c -Wall

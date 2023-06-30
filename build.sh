@@ -1,0 +1,1 @@
+gcc agenda.c contato.c fileio.c -Wall
