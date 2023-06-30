@@ -1,4 +1,5 @@
 #include "contato.h"
+#include "fileio.h"
 
 struct noTele{
     char numeros[160];
@@ -235,4 +236,23 @@ void listPrint(agenda *list){
         putchar('\n');
     }
     putchar('\n');
+}
+
+bool updateContact(agenda* lista, numbers *listanum, mail* listaem, char* nome,char *num, char *telef){
+    node*aux= lista->inicio;
+    while(aux && strcmp(aux->nome, nome)!=0){
+        aux=aux->next;
+    }
+    if(validar_telefone(telef)){
+        addNumbers(aux->headNumeros, telef);
+    }else{
+        while(!validar_telefone(telef)){
+            printf("Telefone: ");
+            scanf("%[^\n]", telef);
+            scanf("%*c");
+        }
+        addNumbers(aux->headNumeros, telef);
+    }
+   ;
+
 }
