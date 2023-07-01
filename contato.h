@@ -6,12 +6,6 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#define gmail "@gmail.com"
-#define hotmail "@hotmail.com"
-#define proton "@proton.me"
-#define yahoo "@yahoo.com.br"
-#define uft "@mail.uft.edu.br"
-
 typedef struct agenda agenda;
 typedef struct telefones numbers;
 typedef struct email mail;
